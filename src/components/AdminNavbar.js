@@ -53,14 +53,14 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                     </h4>
 
                     <div className="flex">
-                        <NavbarInput placeholder="Search" />
+                        {/* <NavbarInput placeholder="Search" /> */}
 
                         <div className="-mr-4 ml-6">
                             <Dropdown
                                 color="transparent"
                                 buttonText={
                                     <div className="w-12">
-                                        <Image src={ProfilePicture} rounded />
+                                        <Image src={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} rounded />
                                     </div>
                                 }
                                 rounded
