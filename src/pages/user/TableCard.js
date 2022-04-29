@@ -9,7 +9,7 @@ import Team3 from "../../assets/img/team-3-800x800.jpg";
 import Team4 from "../../assets/img/team-4-470x470.png";
 import React, { useState } from "react";
 import Modal from "../../components/Modal";
-import { getUsers, addUser,deleteUser, addNodeforUser } from "./api";
+import { getUsers, addUser, deleteUser, addNodeforUser } from "./api";
 import { useQuery } from "react-query";
 import ReactDeleteRow from "react-delete-row";
 import axios from "api/axios";
@@ -31,7 +31,7 @@ export default function CardTable() {
   return (
     <>
       <Card>
-        <CardHeader color="orange" contentPosition="none">
+        <CardHeader color="blue" contentPosition="none">
           <div className="flex items-center justify-between  ">
             <h2 className="text-white text-2xl ">User Table</h2>
 
@@ -70,7 +70,7 @@ export default function CardTable() {
                     Name
                   </th>
                   <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    Attribute1
+                    Email
                   </th>
                   <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                     Attribute2
@@ -97,7 +97,8 @@ export default function CardTable() {
                           {item.name}
                         </th>
                         <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                          Attribute
+                        {item.email}
+
                         </th>
                         <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                           <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{" "}
@@ -107,7 +108,7 @@ export default function CardTable() {
                           {item.GSI1PK != "user" ? "used" : "not used"}
                         </th>
                         <th className="flex border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                        <button
+                          <button
                             onClick={() => {
                               setShowModalSensor(true);
                               setUser(item);
@@ -173,13 +174,14 @@ export default function CardTable() {
                                 </svg>
                               </button>
                             }
-                       
+
                             onDelete={(item) => {
                               return window.confirm(
                                 `Are you sure you want to delete "${item.name}"?`
                               );
                             }}
                           ></ReactDeleteRow>
+                          
                         </th>
                       </tr>
                     );
@@ -209,8 +211,9 @@ export default function CardTable() {
 
 const Form = (props) => {
   const [item, setItem] = useState(props.item);
-  const changeAttr = (attr)=>{
-    setItem({...item,...attr})
+  const changeAttr = (attr) => {
+    console.log(attr);
+    setItem({ ...item, ...attr })
   }
 
   return (
@@ -236,7 +239,7 @@ const Form = (props) => {
             id="User-Name"
             type="text"
             name="name"
-            onChange={e => changeAttr({name:e.target.value})}
+            onChange={e => changeAttr({ name: e.target.value })}
             value={item.name}
             placeholder="User Name"
           />
@@ -245,18 +248,18 @@ const Form = (props) => {
         <div class="w-full md:w-1/2 px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="Attribute1"
+            for="email"
           >
-            Attribute1
+            email
           </label>
           <input
-            onChange={e => changeAttr({attribute1:e.target.value})}
-            value={item.attribute1}
+            onChange={e => changeAttr({ email: e.target.value })}
+            value={item.email}
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="Attribute1"
-            name="attribute1"
+            id="email"
+            name="email"
             type="text"
-            placeholder="Attribute1"
+            placeholder="email"
           />
         </div>
       </div>
@@ -269,7 +272,7 @@ const Form = (props) => {
             Attribute2
           </label>
           <input
-            onChange={e => changeAttr({attribute2:e.target.value})}
+            onChange={e => changeAttr({ attribute2: e.target.value })}
             value={item.attribute2}
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="Attribute2"
@@ -291,7 +294,7 @@ const Form = (props) => {
             Attribute3
           </label>
           <input
-            onChange={e => changeAttr({attribute3:e.target.value})}
+            onChange={e => changeAttr({ attribute3: e.target.value })}
 
             value={item.attribute3}
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -310,7 +313,7 @@ const Form = (props) => {
           </label>
           <div class="relative">
             <select
-            onChange={e => changeAttr({attribute4:e.target.value})}
+              onChange={e => changeAttr({ attribute4: e.target.value })}
 
               value={item.attribute4}
               name="attribute4"
@@ -340,7 +343,7 @@ const Form = (props) => {
             Attribute5
           </label>
           <input
-            onChange={e => changeAttr({attribute5:e.target.value})}
+            onChange={e => changeAttr({ attribute5: e.target.value })}
 
             value={item.attribute5}
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -352,9 +355,62 @@ const Form = (props) => {
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-2">
+        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold ">
+            <input
+              className="mx-4"
+              type="checkbox"
+              checked={item.dfNode}
+              onChange={e => changeAttr({ dfNode: e.target.checked })}
+            />
+            defulte Node
+          </label>
+        </div>
+        {item.dfNode ? <> <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+          <label
+            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="nodeId"
+          >
+            nodeId
+          </label>
+          <input
+            onChange={e => changeAttr({ nodeId: e.target.value })}
+
+            value={item.nodeId}
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="nodeId"
+            name="nodeId"
+            type="text"
+            placeholder="nodeId"
+          />
+        </div>
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="sensorId"
+            >
+              sensorId
+            </label>
+            <input
+              onChange={e => changeAttr({ sensorId: e.target.value })}
+
+              value={item.sensorId}
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="sensorId"
+              name="sensorId"
+              type="text"
+              placeholder="sensorId"
+            />
+          </div></> : null}
+
+
+
+      </div>
+      <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full md:w-1/3 px-3 mb-6 mt-6 md:mb-0">
           <button
-          // onClick={()=>props.setShowModal(false)}
+            // onClick={()=>props.setShowModal(false)}
             type="submit"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
@@ -400,12 +456,12 @@ const ScoreModale = (props) => {
                   />
                   <h1 class="text-gray-50 font-semibold">{item.name}</h1>
 
-                  <button 
-                  onClick={()=>{
-                    addNodeforUser({...item,userId:props.userId});
-                    props.setShowModalSensor(false)
-                  }}
-                  class="px-8 py-1 border-2  bg-yellowy rounded-full text-gray-50 font-semibold">
+                  <button
+                    onClick={() => {
+                      addNodeforUser({ ...item, userId: props.userId });
+                      props.setShowModalSensor(false)
+                    }}
+                    class="px-8 py-1 border-2  bg-yellowy rounded-full text-gray-50 font-semibold">
                     Add
                   </button>
                 </div>

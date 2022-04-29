@@ -29,7 +29,7 @@ export default function CardTable() {
   return (
     <>
       <Card>
-        <CardHeader color="purple" contentPosition="none">
+        <CardHeader color="blue" contentPosition="none">
           <div className="flex items-center justify-between  ">
             <h2 className="text-white text-2xl ">Node Table</h2>
 
@@ -243,19 +243,26 @@ const Form = (props) => {
         <div class="w-full md:w-1/2 px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="Attribute1"
+            for="nodeId"
           >
-            Attribute1
+            nodeId
           </label>
-          <input
-            onChange={(e) => changeAttr({ attribute1: e.target.value })}
-            value={item.attribute1}
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="Attribute1"
-            name="attribute1"
-            type="text"
-            placeholder="Attribute1"
-          />
+          {!item.SK? <input
+          
+          onChange={(e) => changeAttr({ nodeId: e.target.value })}
+          value={item.nodeId}
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          id="nodeId"
+          name="nodeId"
+          type="text"
+          placeholder="nodeId"
+          
+        /> :   <label
+            class="block uppercase mt-4 ml-2 tracking-wide text-gray-700 text-lg font-bold mb-2"
+            for="nodeId"
+          >
+            {item.SK.split('_')[1]}
+          </label>}
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
