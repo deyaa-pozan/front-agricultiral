@@ -125,6 +125,7 @@ export default function CardTable() {
                               </g>
                             </svg>
                           </button>
+                          
                           <ReactDeleteRow
                             key={item.SK}
                             data={item}

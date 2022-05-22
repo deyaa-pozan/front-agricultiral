@@ -61,9 +61,9 @@ const App = () => {
       {/* {isLoading && "isLoading"}
       {error && "error"}
       {isFetching && "isFetching"} */}
-      {!data ? (
+      {!true ? (
         <Routes>
-          <Route exact element={<PublicRoute isAuthenticated={data} />}>
+          <Route exact element={<PublicRoute isAuthenticated={false} />}>
             <Route exact path="/login" element={<Login />} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<Navigate to="/login" />} />
@@ -75,16 +75,16 @@ const App = () => {
           <Sidebar />
           <div className="md:ml-64">
             <Routes>
-              <Route exact element={<PrivateRoute isAuthenticated={data} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
                 <Route path="/sensors" element={<Sensor />} />
               </Route>
-              <Route exact element={<PrivateRoute isAuthenticated={data} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
                 <Route path="/nodes" element={<Node />} />
               </Route>
-              <Route exact element={<PrivateRoute isAuthenticated={data} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
                 <Route path="/" element={<Dashboard />} />
               </Route>
-              <Route exact element={<PrivateRoute isAuthenticated={data} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
                 <Route path="/users" element={<User />} />
               </Route>
               <Route path="*" element={<Navigate to="/" />} />

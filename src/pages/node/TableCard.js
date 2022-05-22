@@ -1,7 +1,7 @@
 import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
-import Image from "@material-tailwind/react/Image";
+import FilterDate from "./FilterDate";
 import Progress from "@material-tailwind/react/Progress";
 import Team1 from "../../assets/img/team-1-800x800.jpg";
 import Team2 from "../../assets/img/team-2-800x800.jpg";
@@ -21,10 +21,11 @@ export default function CardTable() {
   // const [record, setRecord] = useState([]);
   const [node, setNode] = useState(false);
   const { isLoading, error, data, isFetching } = useQuery(
-    ["nodeData"],
+    ["CSV"],
     () => getAllNodes(),
     { keepPreviousData: true }
   );
+
 
   return (
     <>
@@ -124,6 +125,29 @@ export default function CardTable() {
                             >
                               <path d="M8 0C3.589 0 0 3.589 0 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm0 14c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path>
                               <path d="M9 4L7 4 7 7 4 7 4 9 7 9 7 12 9 12 9 9 12 9 12 7 9 7z"></path>
+                            </svg>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setShowModal(true);
+                              setNode(item);
+                            }}
+                            class="bg-green-500 hover:bg-green-700  text-grey-darkest font-bold py-2 px-1 mx-1 rounded inline-flex items-center"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-5 h-5"
+                              x="0"
+                              y="0"
+                              enableBackground="new 0 0 330 330"
+                              version="1.1"
+                              viewBox="0 0 330 330"
+                              xmlSpace="preserve"
+                            >
+                              <g>
+                                <path d="M75 180v60c0 8.284 6.716 15 15 15h60a15 15 0 0010.606-4.394l164.999-165c5.858-5.858 5.858-15.355 0-21.213l-60-60a14.997 14.997 0 00-21.211.001l-165 165A14.994 14.994 0 0075 180zm30 6.213l150-150L293.787 75l-150 150H105v-38.787z"></path>
+                                <path d="M315 150.001c-8.284 0-15 6.716-15 15V300H30V30h135c8.284 0 15-6.716 15-15s-6.716-15-15-15H15C6.716 0 0 6.716 0 15v300c0 8.284 6.716 15 15 15h300c8.284 0 15-6.716 15-15V165.001c0-8.285-6.716-15-15-15z"></path>
+                              </g>
                             </svg>
                           </button>
                           <button

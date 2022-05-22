@@ -3,7 +3,7 @@ import React from "react";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-const LOGIN_URL = "/auth/loginCognito";
+const LOGIN_URL = "/auth/LoginAdmin";
 
 export default function Login() {
   const handleSubmit = async (e) => {
@@ -17,13 +17,13 @@ export default function Login() {
         headers: { "Content-Type": "application/json" },
       });
 
-      const accessToken = response.data?.message?.accessToken?.jwtToken;
-      const userData = response.data?.message?.idToken?.payload;
-      const value = { accessToken, userData };
+      const value = { accessToken:response?.data?.message?.jwt };
+      console.log(value);
       cookies.set("token", value, { path: "/" });
 
       window.location.reload(false);
     } catch (err) {
+      console.log();
     }
   };
   return (
@@ -64,7 +64,7 @@ export default function Login() {
                         </label>
                         <input
                           name="email"
-                          type="email"
+                          type="text"
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Email"
                           style={{ transition: "all .15s ease" }}

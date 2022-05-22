@@ -97,7 +97,7 @@ export default function CardTable() {
                           {item.name}
                         </th>
                         <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                        {item.email}
+                          {item.email}
 
                         </th>
                         <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
@@ -181,7 +181,7 @@ export default function CardTable() {
                               );
                             }}
                           ></ReactDeleteRow>
-                          
+
                         </th>
                       </tr>
                     );
@@ -370,39 +370,22 @@ const Form = (props) => {
         {item.dfNode ? <> <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="nodeId"
+            for="countNodes"
           >
-            nodeId
+            count for nodes
           </label>
           <input
-            onChange={e => changeAttr({ nodeId: e.target.value })}
+            onChange={e => changeAttr({ countNodes: e.target.value })}
 
-            value={item.nodeId}
+            value={item.countNodes}
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="nodeId"
-            name="nodeId"
-            type="text"
-            placeholder="nodeId"
+            id="countNodes"
+            name="countNodes"
+            type="countNodes"
+            placeholder="countNodes"
           />
         </div>
-          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="sensorId"
-            >
-              sensorId
-            </label>
-            <input
-              onChange={e => changeAttr({ sensorId: e.target.value })}
-
-              value={item.sensorId}
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="sensorId"
-              name="sensorId"
-              type="text"
-              placeholder="sensorId"
-            />
-          </div></> : null}
+        </> : null}
 
 
 

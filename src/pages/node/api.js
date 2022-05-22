@@ -4,6 +4,7 @@ const GET_ALL_NODES = "/api/getAllNodes";
 const ADD_NODE = "/api/createNode";
 const DELETE_NODE = "/api/deleteNode";
 const ADD_SENSOR_FOR_NODE = "/api/addSensorforNode";
+const BETWEEN_TWO_DATES = "/api/getReadingsBetweenTwoDates";
 
 export const getAllNodes = async () => {
   const response = await axios.get(GET_ALL_NODES);
@@ -24,8 +25,17 @@ export const deleteNode = async (nodeId) => {
     
     return response;
   };
+
   export const addSensorforNode = async (body) => {
     const response = await axios.put(ADD_SENSOR_FOR_NODE, body, {
+      headers: { "Content-Type": "application/json" },
+    });
+    
+    return response;
+  };
+
+  export const getReadingsBetweenTwoDates = async (body) => {
+    const response = await axios.post(BETWEEN_TWO_DATES, body, {
       headers: { "Content-Type": "application/json" },
     });
     
