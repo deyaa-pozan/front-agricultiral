@@ -9,6 +9,7 @@ import Team3 from "../../assets/img/team-3-800x800.jpg";
 import Team4 from "../../assets/img/team-4-470x470.png";
 import React, { useState } from "react";
 import Modal from "../../components/Modal";
+import Filter from "./FilterDate";
 import { getAllNodes, addNode, deleteNode, addSensorforNode } from "./api";
 import { useQuery } from "react-query";
 import ReactDeleteRow from "react-delete-row";
@@ -16,19 +17,21 @@ import axios from "api/axios";
 
 export default function CardTable() {
   const [showModal, setShowModal] = useState(false);
+  const [showModalDate, setShowModalDate] = useState(false);
   const [showModalSensor, setShowModalSensor] = useState(false);
 
   // const [record, setRecord] = useState([]);
   const [node, setNode] = useState(false);
+
   const { isLoading, error, data, isFetching } = useQuery(
     ["CSV"],
     () => getAllNodes(),
     { keepPreviousData: true }
   );
 
-
   return (
     <>
+      {/* <Filter/> */}
       <Card>
         <CardHeader color="blue" contentPosition="none">
           <div className="flex items-center justify-between  ">
@@ -152,25 +155,21 @@ export default function CardTable() {
                           </button>
                           <button
                             onClick={() => {
-                              setShowModal(true);
+                              setShowModalDate(true);
                               setNode(item);
                             }}
-                            class="bg-green-500 hover:bg-green-700  text-grey-darkest font-bold py-2 px-1 mx-1 rounded inline-flex items-center"
+                            class="bg-green-200 hover:bg-green-700  text-grey-darkest font-bold py-2 px-1 mx-1 rounded inline-flex items-center"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              class="w-5 h-5"
-                              x="0"
-                              y="0"
-                              enableBackground="new 0 0 330 330"
-                              version="1.1"
-                              viewBox="0 0 330 330"
-                              xmlSpace="preserve"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
                             >
-                              <g>
-                                <path d="M75 180v60c0 8.284 6.716 15 15 15h60a15 15 0 0010.606-4.394l164.999-165c5.858-5.858 5.858-15.355 0-21.213l-60-60a14.997 14.997 0 00-21.211.001l-165 165A14.994 14.994 0 0075 180zm30 6.213l150-150L293.787 75l-150 150H105v-38.787z"></path>
-                                <path d="M315 150.001c-8.284 0-15 6.716-15 15V300H30V30h135c8.284 0 15-6.716 15-15s-6.716-15-15-15H15C6.716 0 0 6.716 0 15v300c0 8.284 6.716 15 15 15h300c8.284 0 15-6.716 15-15V165.001c0-8.285-6.716-15-15-15z"></path>
-                              </g>
+                              <path
+                                fill="#454242"
+                                d="M5.673 0a.7.7 0 01.7.7v1.309h7.517v-1.3a.7.7 0 011.4 0v1.3H18a2 2 0 012 1.999v13.993A2 2 0 0118 20H2a2 2 0 01-2-1.999V4.008a2 2 0 012-1.999h2.973V.699a.7.7 0 01.7-.699zM1.4 7.742v10.259a.6.6 0 00.6.6h16a.6.6 0 00.6-.6V7.756L1.4 7.742zm5.267 6.877v1.666H5v-1.666h1.667zm4.166 0v1.666H9.167v-1.666h1.666zm4.167 0v1.666h-1.667v-1.666H15zm-8.333-3.977v1.666H5v-1.666h1.667zm4.166 0v1.666H9.167v-1.666h1.666zm4.167 0v1.666h-1.667v-1.666H15zM4.973 3.408H2a.6.6 0 00-.6.6v2.335l17.2.014V4.008a.6.6 0 00-.6-.6h-2.71v.929a.7.7 0 01-1.4 0v-.929H6.373v.92a.7.7 0 01-1.4 0v-.92z"
+                              ></path>
                             </svg>
                           </button>
                           <ReactDeleteRow
@@ -224,6 +223,15 @@ export default function CardTable() {
             />
           </Modal>
         ) : null}
+        {showModalDate ? (
+          <Modal setShowModal={setShowModalDate}>
+            <Filter
+              nodeId={node.SK}
+              setShowModalDate={setShowModalDate}
+            />
+          </Modal>
+        ) : null}
+
       </Card>
     </>
   );
@@ -271,17 +279,17 @@ const Form = (props) => {
           >
             nodeId
           </label>
-          {!item.SK? <input
-          
-          onChange={(e) => changeAttr({ nodeId: e.target.value })}
-          value={item.nodeId}
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          id="nodeId"
-          name="nodeId"
-          type="text"
-          placeholder="nodeId"
-          
-        /> :   <label
+          {!item.SK ? <input
+
+            onChange={(e) => changeAttr({ nodeId: e.target.value })}
+            value={item.nodeId}
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="nodeId"
+            name="nodeId"
+            type="text"
+            placeholder="nodeId"
+
+          /> : <label
             class="block uppercase mt-4 ml-2 tracking-wide text-gray-700 text-lg font-bold mb-2"
             for="nodeId"
           >
@@ -456,12 +464,12 @@ const ScoreModale = (props) => {
                   />
                   <h1 class="text-gray-50 font-semibold">{item.name}</h1>
 
-                  <button 
-                  onClick={()=>{
-                    addSensorforNode({...item,nodeId:props.nodeId});
-                    props.setShowModalSensor(false)
-                  }}
-                  class="px-8 py-1 border-2  bg-yellowy rounded-full text-gray-50 font-semibold">
+                  <button
+                    onClick={() => {
+                      addSensorforNode({ ...item, nodeId: props.nodeId });
+                      props.setShowModalSensor(false)
+                    }}
+                    class="px-8 py-1 border-2  bg-yellowy rounded-full text-gray-50 font-semibold">
                     Add
                   </button>
                 </div>
@@ -472,3 +480,4 @@ const ScoreModale = (props) => {
     </>
   );
 };
+

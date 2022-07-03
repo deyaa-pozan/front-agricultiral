@@ -8,18 +8,21 @@ import { getAllNodes, getReadingsBetweenTwoDates } from "./api";
 
 
 
-export default function App() {
+export default function App(props) {
 
     const [state, setState] = useState([
         {
             startDate: new Date(),
-            endDate: null,
+            endDate: new Date(),
             key: "selection"
         }
     ]);
+    const [data, setData] = useState([]);
+    const [complate, setComplate] = useState(false);
+    const [err, setErr] = useState('');
 
 
-let dataMoc = [
+    let dataMoc = [
         {
             "Bettery": "88%",
             "Luxes": "0 Ohms",
@@ -63,28 +66,47 @@ let dataMoc = [
             "Bytlength": 102
         }
     ]
-    const { isLoading, error, data, isFetching } = useQuery(
-        ["CSV"],
-        () => getReadingsBetweenTwoDates(),
-        { keepPreviousData: true }
-      );
+    // const { isLoading, error, data, isFetching } = useQuery(
+    //     ["CSV"],
+    //     () => getReadingsBetweenTwoDates(),
+    //     { keepPreviousData: true }
+    // );
+    const filter = async () => {
+        setComplate(false)
+        let response = await getReadingsBetweenTwoDates(props.nodeId, state)
+        if (response.length != 0) {
+            console.log(response);
+            setData(response)
+            setComplate(true)
+            setErr('')
+
+        } else {
+            console.log('There are no any data');
+            setErr('There are no any data')
+        }
+
+    }
     return (
-        <div className="App">
-            <h1>react-date-range Example</h1>
+        <div className="App   flex flex-col container justify-center">
             <DateRange
-                onChange={item => setState([item.selection])}
+                onChange={item => {
+                    setComplate(false)
+                    setState([item.selection])
+
+                }}
+
                 moveRangeOnFirstSelection={false}
                 ranges={state}
             />
-            <CsvDownload
-                data={dataMoc}
+            <div className="text-red-500 text-xl text-center ">{err ? err : null}</div>
+            {complate ? null : <button className="bg-blue-500 px-6 py-2 rounded-md cursor-pointer font-bold" onClick={filter}>get data</button>}
+            {data && complate && (<CsvDownload
+                data={data}
                 filename="good_data.csv"
                 style={{ //pass other props, like styles
-                    boxShadow: "inset 0px 1px 0px 0px #e184f3",
-                    background: "linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
-                    backgroundColor: "#c123de",
+                    background: "#2296f3",
+                    backgroundColor: "#2296f3",
                     borderRadius: "6px",
-                    border: "1px solid #a511c0",
                     display: "inline-block",
                     cursor: "pointer", "color": "#ffffff",
                     fontSize: "15px",
@@ -94,8 +116,11 @@ let dataMoc = [
                     textShadow: "0px 1px 0px #9b14b3"
                 }}
             >
-                Good Data ✨
-            </CsvDownload>
+                Download
+            </CsvDownload>)}
+
+
+
 
         </div>
     );

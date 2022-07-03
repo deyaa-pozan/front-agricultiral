@@ -6,25 +6,25 @@ const cookies = new Cookies();
 const LOGIN_URL = "/auth/LoginAdmin";
 
 export default function Login() {
+  const [err, setErr] = React.useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    try {
-      const response = await axios.post(LOGIN_URL, body, {
+
+      await axios.post(LOGIN_URL, body, {
         headers: { "Content-Type": "application/json" },
-      });
+      }).then(response => {
+        const value = { accessToken: response?.data?.message?.jwt, userData: response?.data?.message?.userData };
+        cookies.set("token", value, { path: "/" });
+        window.location.reload(false);
+      }).catch(err =>{
+          setErr(err.response?.data.message)
 
-      const value = { accessToken:response?.data?.message?.jwt };
-      console.log(value);
-      cookies.set("token", value, { path: "/" });
-
-      window.location.reload(false);
-    } catch (err) {
-      console.log();
-    }
+      })
   };
   return (
     <>
@@ -87,7 +87,7 @@ export default function Login() {
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
-
+                      <div className="text-red-500 text-xl text-center">{err}</div>
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
@@ -100,7 +100,7 @@ export default function Login() {
                     </form>
                   </div>
                 </div>
-                <div className="flex flex-wrap mt-6">
+                {/* <div className="flex flex-wrap mt-6">
                   <div className="w-1/2">
                     <a
                       href="#pablo"
@@ -119,7 +119,7 @@ export default function Login() {
                       <small>Create new account</small>
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

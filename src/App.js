@@ -22,7 +22,7 @@ import PrivateRoute from "components/PrivateRoute";
 import PublicRoute from "components/PublicRoute";
 
 const cookies = new Cookies();
-const VALIDATE_TOKEN_URL = "/api/ValidateToken";
+const VALIDATE_TOKEN_URL = "/api/ValidateTokenAdmin";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -61,9 +61,9 @@ const App = () => {
       {/* {isLoading && "isLoading"}
       {error && "error"}
       {isFetching && "isFetching"} */}
-      {!true ? (
+      {!isLogin ? (
         <Routes>
-          <Route exact element={<PublicRoute isAuthenticated={false} />}>
+          <Route exact element={<PublicRoute isAuthenticated={isLogin} />}>
             <Route exact path="/login" element={<Login />} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<Navigate to="/login" />} />
@@ -75,16 +75,16 @@ const App = () => {
           <Sidebar />
           <div className="md:ml-64">
             <Routes>
-              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={isLogin} />}>
                 <Route path="/sensors" element={<Sensor />} />
               </Route>
-              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={isLogin} />}>
                 <Route path="/nodes" element={<Node />} />
               </Route>
-              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={isLogin} />}>
                 <Route path="/" element={<Dashboard />} />
               </Route>
-              <Route exact element={<PrivateRoute isAuthenticated={true} />}>
+              <Route exact element={<PrivateRoute isAuthenticated={isLogin} />}>
                 <Route path="/users" element={<User />} />
               </Route>
               <Route path="*" element={<Navigate to="/" />} />

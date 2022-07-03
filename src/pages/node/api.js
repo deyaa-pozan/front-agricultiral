@@ -34,10 +34,14 @@ export const deleteNode = async (nodeId) => {
     return response;
   };
 
-  export const getReadingsBetweenTwoDates = async (body) => {
-    const response = await axios.post(BETWEEN_TWO_DATES, body, {
+  export const getReadingsBetweenTwoDates = async (nodeId,body) => {
+    body = {
+      from :body[0]?.startDate,
+      to:body[0]?.endDate
+    }
+console.log(body);
+    const response = await axios.post(BETWEEN_TWO_DATES+"/"+nodeId, body, {
       headers: { "Content-Type": "application/json" },
     });
-    
-    return response;
+    return response?.data?.message;
   };
