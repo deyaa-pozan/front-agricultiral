@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/material-tailwind-dashboard-react/static/css/main.ede3e2c1.chunk.css",
+    "main.js": "/material-tailwind-dashboard-react/static/js/main.a24486cb.chunk.js",
+    "main.js.map": "/material-tailwind-dashboard-react/static/js/main.a24486cb.chunk.js.map",
+    "runtime-main.js": "/material-tailwind-dashboard-react/static/js/runtime-main.6ce065f0.js",
+    "runtime-main.js.map": "/material-tailwind-dashboard-react/static/js/runtime-main.6ce065f0.js.map",
+    "static/css/2.425a54b9.chunk.css": "/material-tailwind-dashboard-react/static/css/2.425a54b9.chunk.css",
+    "static/js/2.326f77e4.chunk.js": "/material-tailwind-dashboard-react/static/js/2.326f77e4.chunk.js",
+    "static/js/2.326f77e4.chunk.js.map": "/material-tailwind-dashboard-react/static/js/2.326f77e4.chunk.js.map",
+    "static/js/3.4b2426de.chunk.js": "/material-tailwind-dashboard-react/static/js/3.4b2426de.chunk.js",
+    "static/js/3.4b2426de.chunk.js.map": "/material-tailwind-dashboard-react/static/js/3.4b2426de.chunk.js.map",
+    "index.html": "/material-tailwind-dashboard-react/index.html",
+    "static/css/2.425a54b9.chunk.css.map": "/material-tailwind-dashboard-react/static/css/2.425a54b9.chunk.css.map",
+    "static/css/main.ede3e2c1.chunk.css.map": "/material-tailwind-dashboard-react/static/css/main.ede3e2c1.chunk.css.map",
+    "static/js/2.326f77e4.chunk.js.LICENSE.txt": "/material-tailwind-dashboard-react/static/js/2.326f77e4.chunk.js.LICENSE.txt",
+    "static/media/register_bg_2.png": "/material-tailwind-dashboard-react/static/media/register_bg_2.4f2cb0ac.png",
+    "static/media/team-1-800x800.fa5a7ac2.jpg": "/material-tailwind-dashboard-react/static/media/team-1-800x800.fa5a7ac2.jpg",
+    "static/media/team-2-800x800.3e08ef14.jpg": "/material-tailwind-dashboard-react/static/media/team-2-800x800.3e08ef14.jpg",
+    "static/media/team-3-800x800.19201574.jpg": "/material-tailwind-dashboard-react/static/media/team-3-800x800.19201574.jpg",
+    "static/media/team-4-470x470.4ef82ef4.png": "/material-tailwind-dashboard-react/static/media/team-4-470x470.4ef82ef4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6ce065f0.js",
+    "static/css/2.425a54b9.chunk.css",
+    "static/js/2.326f77e4.chunk.js",
+    "static/css/main.ede3e2c1.chunk.css",
+    "static/js/main.a24486cb.chunk.js"
+  ]
+}
