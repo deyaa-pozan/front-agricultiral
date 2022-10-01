@@ -802,6 +802,9 @@ video {
 .border-collapse{
 	border-collapse: collapse;
 }
+.cursor-pointer{
+	cursor: pointer;
+}
 .list-none{
 	list-style-type: none;
 }
@@ -881,6 +884,9 @@ video {
 }
 .rounded-full{
 	border-radius: 9999px;
+}
+.rounded-md{
+	border-radius: 0.375rem;
 }
 .rounded-t{
 	border-top-left-radius: 0.25rem;
