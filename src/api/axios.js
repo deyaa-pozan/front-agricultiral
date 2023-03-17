@@ -5,7 +5,7 @@ const cookies = new Cookies();
 let token = cookies.get("token");
 
 export default axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: process.env.REACT_APP_API_BASE_URL_PRODUCTION||"https://backend-software.agritech4.net",
     headers: {'Authorization': 'Bearer '+token}
 });
 
