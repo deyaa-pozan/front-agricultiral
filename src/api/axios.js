@@ -5,10 +5,10 @@ const cookies = new Cookies();
 let token = cookies.get("token");
 
 export default axios.create({
-    baseURL: 'https://agricultiral.herokuapp.com',
+    baseURL: 'http://localhost:8080',
     headers: {'Authorization': 'Bearer '+token}
 });
 
-// https://agricultiral.herokuapp.com
+// http://localhost:8080
 
 // http://localhost:8081
