@@ -437,14 +437,14 @@ const ScoreModale = (props) => {
                     src={item.img}
                     alt="user image"
                   />
-                  <h1 class="text-gray-50 font-semibold">{item.name}</h1>
+                  <h1 class="text-black font-semibold">{item.name}</h1>
 
                   <button
                     onClick={() => {
                       addNodeforUser({ ...item, userId: props.userId });
                       props.setShowModalSensor(false)
                     }}
-                    class="px-8 py-1 border-2  bg-yellowy rounded-full text-gray-50 font-semibold">
+                    class="px-8 py-1 border-2  bg-yellowy rounded-full text-black font-semibold">
                     Add
                   </button>
                 </div>
